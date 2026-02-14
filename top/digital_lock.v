@@ -1,23 +1,21 @@
-module digital_lock #(
-    parameter CODE_LEN = 4
-)(
+module digital_lock #(parameter CODE_LEN = 4)
+   (
     input  wire clk,
     input  wire rst_n,
     input  wire digit_valid,
     input  wire submit,
     input  wire [3:0] digit_in,
     input  wire [CODE_LEN*4-1:0] stored_code,  
-
     output wire unlock_led,
     output wire fail_led,
     output wire ready_for_input
-);
+   );
 
     wire [CODE_LEN*4-1:0] entered_code;
     wire full;
     wire match;
 
-    // Shift Register Bloc
+    // Shift Register Block
     input_handle #(.CODE_LEN(CODE_LEN)) u_shift (
         .clk(clk),
         .rst_n(rst_n),
